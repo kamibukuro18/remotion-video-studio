@@ -146,15 +146,12 @@ export const Talk: React.FC<TalkProps> = ({ voiceConfig, from, meta }) => {
   );
 };
 
-const VERTICAL_PADDING_PX = 0;
-const HORIZONTAL_PADDING_PX = 40;
-
 const imagePosition: React.CSSProperties = {
   position: 'absolute',
-  height: `calc(100% - ${VIDEO_SETTINGS.subtitleHeightPx}px - ${VERTICAL_PADDING_PX * 2}px)`, // VIDEO_SETTINGS.subtitleHeightPx を参照
-  top: VERTICAL_PADDING_PX,
-  left: HORIZONTAL_PADDING_PX,
-  width: `calc(${100 - VIDEO_SETTINGS.characterWidthPercentage * 100}% - ${HORIZONTAL_PADDING_PX * 2}px)`, // VIDEO_SETTINGS.characterWidthPercentage を参照
+  height: VIDEO_SETTINGS.slideHeight,
+  top: VIDEO_SETTINGS.slideTop,
+  left: VIDEO_SETTINGS.slideLeft,
+  width: VIDEO_SETTINGS.slideWidth,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
