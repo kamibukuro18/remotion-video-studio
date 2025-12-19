@@ -7,16 +7,17 @@ import { VIDEO_SETTINGS, zIndex } from './constants';
 import { VideoConfig } from './yukkuri/yukkuriVideoConfig';
 import { getTotalFramesBeforeSection } from './utils/getTotalFramesBeforeSection';
 import { LoopedOffthreadVideo } from './components/LoopedOffthreadVideo';
+import { SubtitleWithBackground } from './Subtitle/SubtitleBackground';
 
 export const YukkuriVideo: React.FC<{
   videoConfig: VideoConfig;
 }> = ({ videoConfig }) => {
   return (
     <AbsoluteFill style={{
-      backgroundColor: '#000',
-      backgroundImage: `url(${staticFile('image/background.png')})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundColor: VIDEO_SETTINGS.videoBackground.backgroundColor,
+      backgroundImage: `url(${staticFile(VIDEO_SETTINGS.videoBackground.backgroundImage)})`,
+      backgroundSize: VIDEO_SETTINGS.videoBackground.backgroundSize,
+      backgroundPosition: VIDEO_SETTINGS.videoBackground.backgroundPosition,
     }}>
       {videoConfig.sections.map((section, index) => {
         const cumulateFrames = getTotalFramesBeforeSection(videoConfig, index);
@@ -52,11 +53,8 @@ export const YukkuriVideo: React.FC<{
                   {section.showBgVideoOverlay && (
                     <div
                       style={{
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: 'rgba(0, 0, 0, 0.4)',
-                        backdropFilter: 'blur(4px)',
-                        zIndex: '0',
+                        ...VIDEO_SETTINGS.videoOverlay,
+                        zIndex: zIndex.anyValue,
                       }}
                     />
                   )}
@@ -111,7 +109,10 @@ export const YukkuriVideo: React.FC<{
       <div style={jimakuBackground} />
 
       {/* VOICEVOXクレジット表記 */}
-      <div style={voicevoxCreditStyle}>
+      <div style={{
+        ...VIDEO_SETTINGS.voicevoxCreditStyle,
+        zIndex: zIndex.subtitle + 1,
+      }}>
         VOICEVOX:ずんだもん
       </div>
     </AbsoluteFill>
@@ -120,37 +121,17 @@ export const YukkuriVideo: React.FC<{
 
 const jimakuBackground: React.CSSProperties = {
   position: 'absolute',
-  width: 'calc(75%)',
+  width: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.width,
   height: `${VIDEO_SETTINGS.subtitleHeightPx}px`,
-  bottom: 20,
-  left: 40,
-  backgroundImage: `url(${staticFile('image/Cyber_telop2_black.png')})`,
-  backgroundPosition: 'center',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  bottom: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.bottom,
+  left: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.left,
+  backgroundImage: `url(${staticFile(VIDEO_SETTINGS.yukkuriVideoJimakuBackground.backgroundImage)})`,
+  backgroundPosition: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.backgroundPosition,
+  display: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.display,
+  alignItems: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.alignItems,
+  justifyContent: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.justifyContent,
   zIndex: zIndex.anyValue,
 };
 
-const logoStyle: React.CSSProperties = {
-  position: 'absolute',
-  top: '40px',
-  left: '40px',
-  opacity: 0.8,
-  zIndex: zIndex.anyValue,
-};
-
-const voicevoxCreditStyle: React.CSSProperties = {
-  position: 'absolute',
-  bottom: 20,
-  right: 20,
-  color: '#fff',
-  fontSize: '20px',
-  fontFamily: 'sans-serif',
-  fontWeight: 'bold',
-  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  padding: '8px 12px',
-  borderRadius: '4px',
-  zIndex: zIndex.subtitle + 1,
-};
+// const logoStyle: React.CSSProperties = { ... } (削除)
+// const voicevoxCreditStyle: React.CSSProperties = { ... } (削除)
