@@ -5,7 +5,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from 'remotion';
-import {VIDEO_SETTINGS, zIndex} from '../../constants'; // FPS, MABATAKI_INTERVAL_SECONDSなどを削除し、VIDEO_SETTINGSをインポート
+import {VIDEO_SETTINGS, zIndex} from '../../constants';
 
 export type CharacterProps = {
   isTalking?: boolean; // isTalkingプロパティを追加
@@ -71,18 +71,25 @@ export const YukkuriFace: React.FC<CharacterProps> = ({
   const [isMouthOpen, setIsMouthOpen] = useState<boolean>(false); // 口パクの状態を追加
 
   useEffect(() => {
-    const blinkIntervalFrames = MABATAKI_INTERVAL_SECONDS * video.fps;
-    const animationFrames = MABATAKI_ANIMATION_FRAMES;
+    const blinkIntervalFrames = VIDEO_SETTINGS.mabatakiIntervalSeconds * video.fps;
+    const animationDurationFrames = VIDEO_SETTINGS.mabatakiAnimationDurationFrames;
+
+    const MABATAKI_ANIMATION_FRAMES = [
+      VIDEO_SETTINGS.yukkuriMabatakiAnimationThreshold1 * animationDurationFrames,
+      VIDEO_SETTINGS.yukkuriMabatakiAnimationThreshold2 * animationDurationFrames,
+      VIDEO_SETTINGS.yukkuriMabatakiAnimationThreshold3 * animationDurationFrames,
+      VIDEO_SETTINGS.yukkuriMabatakiAnimationThreshold4 * animationDurationFrames,
+    ];
 
     const frameInInterval = frame % blinkIntervalFrames;
 
-    if (frameInInterval < animationFrames[0]) {
+    if (frameInInterval < MABATAKI_ANIMATION_FRAMES[0]) {
       setEyeState('00'); // 通常
-    } else if (frameInInterval >= animationFrames[0] && frameInInterval < animationFrames[1]) {
+    } else if (frameInInterval >= MABATAKI_ANIMATION_FRAMES[0] && frameInInterval < MABATAKI_ANIMATION_FRAMES[1]) {
       setEyeState('01'); // 少し閉じる
-    } else if (frameInInterval >= animationFrames[1] && frameInInterval < animationFrames[2]) {
+    } else if (frameInInterval >= MABATAKI_ANIMATION_FRAMES[1] && frameInInterval < MABATAKI_ANIMATION_FRAMES[2]) {
       setEyeState('02'); // 完全に閉じる
-    } else if (frameInInterval >= animationFrames[2] && frameInInterval < animationFrames[3]) {
+    } else if (frameInInterval >= MABATAKI_ANIMATION_FRAMES[2] && frameInInterval < MABATAKI_ANIMATION_FRAMES[3]) {
       setEyeState('01'); // 少し閉じるに戻る
     } else {
       setEyeState('00'); // 通常に戻る
@@ -90,7 +97,7 @@ export const YukkuriFace: React.FC<CharacterProps> = ({
 
     // 口パクのロジックを追加
     if (isTalking) {
-      const mouthCycleLength = 6; // 口パクの1周期の長さ (フレーム数)
+      const mouthCycleLength = VIDEO_SETTINGS.mouthCycleLength; // 口パクの1周期の長さ (フレーム数)
       setIsMouthOpen(frame % mouthCycleLength < mouthCycleLength / 2); // 周期の半分で口を開く
     } else {
       setIsMouthOpen(false); // しゃべっていないときは口を閉じる
@@ -115,22 +122,11 @@ export const YukkuriFace: React.FC<CharacterProps> = ({
   );
 };
 
-const MABATAKI_INTERVAL_SECONDS = VIDEO_SETTINGS.mabatakiIntervalSeconds; // VIDEO_SETTINGS.mabatakiIntervalSeconds を参照
-const MABATAKI_ANIMATION_DURATION_FRAMES = VIDEO_SETTINGS.mabatakiAnimationDurationFrames; // VIDEO_SETTINGS.mabatakiAnimationDurationFrames を参照
-
-// 各状態に切り替わるフレームの閾値
-const MABATAKI_ANIMATION_FRAMES = [
-  0.2 * MABATAKI_ANIMATION_DURATION_FRAMES, // 01.png に切り替わるタイミング
-  0.4 * MABATAKI_ANIMATION_DURATION_FRAMES, // 02.png に切り替わるタイミング
-  0.6 * MABATAKI_ANIMATION_DURATION_FRAMES, // 01.png に戻るタイミング
-  0.8 * MABATAKI_ANIMATION_DURATION_FRAMES, // 00.png に戻るタイミング
-];
-
 const mouthStyle: React.CSSProperties = {
   position: 'absolute',
-  top: '49.6%', // 調整が必要な場合は変更してください
-  left: '50%', // 調整が必要な場合は変更してください
-  width: '100%', // 調整が必要な場合は変更してください
+  top: VIDEO_SETTINGS.yukkuriFaceMouthTop,
+  left: VIDEO_SETTINGS.yukkuriFaceMouthLeft,
+  width: VIDEO_SETTINGS.yukkuriFaceMouthWidth,
   height: 'auto',
   transform: 'translate(-50%, -50%)',
   zIndex: zIndex.yukkuri + 1, // キャラクター本体より前面に表示

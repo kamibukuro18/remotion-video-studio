@@ -12,9 +12,9 @@ export const SubtitleWithBackground = (props: {
 
 const jimakuBackground: React.CSSProperties = {
   position: 'absolute',
-  width: '100%',
+  width: VIDEO_SETTINGS.subtitleBackgroundWidth,
   height: `${VIDEO_SETTINGS.subtitleHeightPx}px`,
-  bottom: 0,
+  bottom: VIDEO_SETTINGS.subtitleBackgroundBottom,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

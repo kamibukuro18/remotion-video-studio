@@ -2,35 +2,35 @@ import React from 'react';
 import {VIDEO_SETTINGS, zIndex} from '../constants'; // VIDEO_SETTINGSをインポート
 
 const baseSubtitleStyle: React.CSSProperties = {
-  fontFamily: 'sans-serif',
-  fontSize: 38, // VIDEO_SETTINGS.subtitleFontSizePx を参照
-  fontWeight: 'bold',
-  lineHeight: VIDEO_SETTINGS.subtitleLineHeight, // VIDEO_SETTINGS.subtitleLineHeight を参照
-  letterSpacing: '0.05em',
+  fontFamily: VIDEO_SETTINGS.subtitleFontFamily,
+  fontSize: VIDEO_SETTINGS.subtitleFontSizePx,
+  fontWeight: VIDEO_SETTINGS.subtitleFontWeight,
+  lineHeight: VIDEO_SETTINGS.subtitleLineHeight,
+  letterSpacing: VIDEO_SETTINGS.subtitleLetterSpacing,
   textRendering: 'optimizeLegibility',
   textAlign: 'left',
   position: 'absolute',
-  top: -70, // 位置を調整
-  left: 40, // 位置を調整
+  top: VIDEO_SETTINGS.subtitleTop,
+  left: VIDEO_SETTINGS.subtitleLeft,
   width: '100%',
   height: '100%',
   display: 'flex',
   alignItems: 'flex-start',
   justifyContent: 'flex-start',
-  paddingTop: '20px', // 位置を調整
-  paddingLeft: '20px', // 位置を調整
+  paddingTop: `${VIDEO_SETTINGS.subtitlePaddingTop}px`,
+  paddingLeft: `${VIDEO_SETTINGS.subtitlePaddingLeft}px`,
   zIndex: zIndex.anyValue,
 };
 
 const strokeSubtitleStyle: React.CSSProperties = {
   ...baseSubtitleStyle,
-  color: '#fff',
-  WebkitTextStroke: '4px #C90003',
+  color: VIDEO_SETTINGS.subtitleColor,
+  WebkitTextStroke: `${VIDEO_SETTINGS.subtitleStrokeWidthPx}px ${VIDEO_SETTINGS.subtitleStrokeColor}`,
 };
 
 const fillSubtitleStyle: React.CSSProperties = {
   ...baseSubtitleStyle,
-  color: '#fff',
+  color: VIDEO_SETTINGS.subtitleColor,
 };
 
 type Props = {
