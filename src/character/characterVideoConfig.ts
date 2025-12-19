@@ -54,7 +54,7 @@ export type VoiceConfig = {
 	videoIndex?: number;
 };
 
-export type kuchipakuMap = { frames: number[]; amplitude: number[] };
+export type characterLipSyncMap = { frames: number[]; amplitude: number[] };
 
 export type VideoConfig = {
 	sections: {
@@ -73,9 +73,9 @@ export type VideoConfig = {
 		afterMovieVolume?: number;
 		// Frame を floor している関係上どうしてもズレが起きるので微調整する苦肉の策
 		afteMovieDelay?: number;
-		kuchipakuMap: kuchipakuMap;
-		reimuKuchipakuMap: kuchipakuMap;
-		marisaKuchipakuMap: kuchipakuMap;
+		characterLipSyncMap: characterLipSyncMap;
+		reimuLipSyncMap: characterLipSyncMap;
+		marisaLipSyncMap: characterLipSyncMap;
 		initialDelayFrames?: number; // Default: 60s
 	}[];
 };

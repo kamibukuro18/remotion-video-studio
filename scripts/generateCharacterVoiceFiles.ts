@@ -5,7 +5,7 @@ const forceGenerate = process.argv[2] === 'force';
 
 if (forceGenerate) {
   const fsExtra = require('fs-extra');
-  fsExtra.emptyDirSync('./public/audio/yukkuri');
+fsExtra.emptyDirSync('./public/audio/character');
 }
 
 // Audio cache file path
@@ -60,10 +60,10 @@ function getTextHash(text: string): string {
       // Generate new audio
       const id = require('uuid').v4().replaceAll('-', '');
       const filename = `${id}.wav`;
-      const filepath = `./public/audio/yukkuri/${filename}`;
+      const filepath = `./public/audio/character/${filename}`;
 
-      if (!fs.existsSync('./public/audio/yukkuri')) {
-        fs.mkdirSync('./public/audio/yukkuri', { recursive: true });
+      if (!fs.existsSync('./public/audio/character')) {
+        fs.mkdirSync('./public/audio/character', { recursive: true });
       }
 
       try {
@@ -142,9 +142,9 @@ function getTextHash(text: string): string {
         fromFramesMap,
         talks: voiceConfigs,
         totalFrames: currentFrame + 60,
-        kuchipakuMap: { frames: [], amplitude: [] },
-        reimuKuchipakuMap: { frames: [], amplitude: [] },
-        marisaKuchipakuMap: { frames: [], amplitude: [] },
+        characterLipSyncMap: { frames: [], amplitude: [] },
+        reimuLipSyncMap: { frames: [], amplitude: [] },
+        marisaLipSyncMap: { frames: [], amplitude: [] },
         beforeMovieFrames: 0,
         afterMovieFrames: 0,
       },
@@ -173,7 +173,7 @@ function getTextHash(text: string): string {
 
   const generatedSection = `
 // この部分は自動生成されます。直接編集しないでください。
-// 音声生成: npx ts-node scripts/generateYukkuriVoiceFiles.ts
+// 音声生成: npx ts-node scripts/generateCharacterVoiceFiles.ts
 
 export const PlaygroundConfig: VideoConfig = ${JSON.stringify(playgroundConfig, null, 2)};
 

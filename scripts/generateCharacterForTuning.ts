@@ -36,4 +36,4 @@ const result = aquestalk.AquesTalkSyntheUtf16(
 	koeText
 );
 const filename = `test.wav`;
-fs.writeFileSync(`./public/audio/yukkuri/test/${filename}`, result);
+fs.writeFileSync(`./public/audio/character/test/${filename}`, result);

@@ -1,8 +1,8 @@
 import {Sequence, useCurrentFrame} from 'remotion';
 import {useMemo} from 'react';
-import {zIndex} from '../constants';
-import {YukkuriFace} from './Face/YukkuriFace';
-import {VideoConfig, VoiceConfig} from './yukkuriVideoConfig';
+import {VIDEO_SETTINGS, zIndex} from '../constants';
+import {CharacterFace} from './Face/CharacterFace';
+import {VideoConfig, VoiceConfig} from './characterVideoConfig';
 // import {getTotalFramesBeforeSection} from '../../utils/getTotalFramesBeforeSection'; // インポートを削除
 
 export type Props = {
@@ -11,7 +11,7 @@ export type Props = {
   videoConfig: VideoConfig;
 };
 
-export const YukkuriSequence: React.FC<Props> = ({talks, fromFramesMap, videoConfig}) => {
+export const CharacterSequence: React.FC<Props> = ({talks, fromFramesMap, videoConfig}) => {
   const frame = useCurrentFrame();
 
   const isTalking = useMemo(() => {
@@ -41,7 +41,7 @@ export const YukkuriSequence: React.FC<Props> = ({talks, fromFramesMap, videoCon
   return (
     <Sequence>
       <div style={characterStyle}>
-        <YukkuriFace isTalking={isTalking} />
+        <CharacterFace isTalking={isTalking} />
       </div>
     </Sequence>
   );
@@ -49,9 +49,9 @@ export const YukkuriSequence: React.FC<Props> = ({talks, fromFramesMap, videoCon
 
 const characterStyle: React.CSSProperties = {
   position: 'absolute',
-  right: '-23%', // 右端から30%はみ出すように調整
-  bottom: '-750px',
-  height: 'auto', // 高さを自動調整
-  width: '67%', // 幅を画面の40%に設定
-  zIndex: zIndex.yukkuri,
+  right: VIDEO_SETTINGS.characterSequenceCharacterRight,
+  bottom: VIDEO_SETTINGS.characterSequenceCharacterBottom,
+  height: 'auto',
+  width: VIDEO_SETTINGS.characterSequenceCharacterWidth,
+  zIndex: zIndex.character,
 };

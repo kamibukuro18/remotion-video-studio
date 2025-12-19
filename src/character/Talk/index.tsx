@@ -2,7 +2,7 @@ import { Audio, Img, OffthreadVideo, Sequence, staticFile } from 'remotion';
 import { CustomObjects } from '../../../transcripts/CustomObjects';
 import { VIDEO_SETTINGS } from '../../constants'; // VIDEO_SETTINGSをインポート
 import { SubtitleWithBackground } from '../../Subtitle/SubtitleBackground';
-import { VoiceConfig } from '../yukkuriVideoConfig';
+import { VoiceConfig } from '../characterVideoConfig';
 import { insertLineBreaks } from '../../utils/textUtils';
 
 export type TalkProps = {
@@ -64,14 +64,14 @@ export const Talk: React.FC<TalkProps> = ({ voiceConfig, from, meta }) => {
             return (
               <Sequence key={id} durationInFrames={Math.max(1, voiceConfig.audioDurationFrames)} from={from}>
                 {/* @ts-ignore */}
-                <Audio src={staticFile(`audio/yukkuri/${id}.wav`)} />
+                <Audio src={staticFile(`audio/character/${id}.wav`)} />
               </Sequence>
             );
           })
         ) : (
           <Sequence durationInFrames={Math.max(1, voiceConfig.audioDurationFrames)} from={from}>
             {/* @ts-ignore */}
-            <Audio src={staticFile(`audio/yukkuri/${voiceConfig.id}.wav`)} />
+            <Audio src={staticFile(`audio/character/${voiceConfig.id}.wav`)} />
           </Sequence>
         ))}
 

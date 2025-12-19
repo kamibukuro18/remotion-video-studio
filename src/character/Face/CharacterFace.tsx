@@ -51,7 +51,7 @@ export type CharacterProps = {
 //   return [frames, intervals];
 // }
 
-export const YukkuriFace: React.FC<CharacterProps> = ({
+export const CharacterFace: React.FC<CharacterProps> = ({
   isTalking,
 }) => {
   const frame = useCurrentFrame();
@@ -109,12 +109,12 @@ export const YukkuriFace: React.FC<CharacterProps> = ({
   return (
     <div /* style={{transform: `translateY(${translateY}%)`}} */ > {/* transformスタイルを削除 */}
       <Img
-        src={staticFile(`char/${eyeState}.png`)}
+        src={staticFile(`${VIDEO_SETTINGS.characterFaceImagePrefix}${eyeState}${VIDEO_SETTINGS.characterFaceImageExtension}`)}
         style={{width: '100%', height: '100%', objectFit: 'contain'}} // 幅と高さを100%に設定
       />
       {isTalking && isMouthOpen && ( // isMouthOpenも条件に追加
         <Img
-          src={staticFile('char/mouth/01.png')}
+          src={staticFile(VIDEO_SETTINGS.characterMouthImagePath)}
           style={mouthStyle}
         />
       )}
@@ -124,11 +124,10 @@ export const YukkuriFace: React.FC<CharacterProps> = ({
 
 const mouthStyle: React.CSSProperties = {
   position: 'absolute',
-  top: VIDEO_SETTINGS.yukkuriFaceMouthTop,
-  left: VIDEO_SETTINGS.yukkuriFaceMouthLeft,
-  width: VIDEO_SETTINGS.yukkuriFaceMouthWidth,
+  top: VIDEO_SETTINGS.characterFaceMouthTop,
+  left: VIDEO_SETTINGS.characterFaceMouthLeft,
+  width: VIDEO_SETTINGS.characterFaceMouthWidth,
   height: 'auto',
   transform: 'translate(-50%, -50%)',
-  zIndex: zIndex.yukkuri + 1, // キャラクター本体より前面に表示
+  zIndex: zIndex.character + 1, // キャラクター本体より前面に表示
 };
-

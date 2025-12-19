@@ -1,15 +1,15 @@
 import { Audio, Img, OffthreadVideo, Sequence, staticFile } from 'remotion';
 import { AbsoluteFill } from 'remotion';
-import { TalkSequence } from './yukkuri/Talk/TalkSequence';
-import { YukkuriSequence } from './yukkuri/YukkuriSequence';
+import { TalkSequence } from './character/Talk/TalkSequence';
+import { CharacterSequence } from './character/CharacterSequence';
 import React from 'react';
 import { VIDEO_SETTINGS, zIndex } from './constants';
-import { VideoConfig } from './yukkuri/yukkuriVideoConfig';
+import { VideoConfig } from './character/characterVideoConfig';
 import { getTotalFramesBeforeSection } from './utils/getTotalFramesBeforeSection';
 import { LoopedOffthreadVideo } from './components/LoopedOffthreadVideo';
 import { SubtitleWithBackground } from './Subtitle/SubtitleBackground';
 
-export const YukkuriVideo: React.FC<{
+export const CharacterVideo: React.FC<{
   videoConfig: VideoConfig;
 }> = ({ videoConfig }) => {
   return (
@@ -68,7 +68,7 @@ export const YukkuriVideo: React.FC<{
               totalFrames={cumulateFrames + section.totalFrames}
             />
 
-            <YukkuriSequence {...section} fromFramesMap={fromFrameMap} videoConfig={videoConfig} />
+            <CharacterSequence {...section} fromFramesMap={fromFrameMap} videoConfig={videoConfig} />
 
             {section.beforeMovie && (
               <Sequence
@@ -121,15 +121,15 @@ export const YukkuriVideo: React.FC<{
 
 const jimakuBackground: React.CSSProperties = {
   position: 'absolute',
-  width: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.width,
+  width: VIDEO_SETTINGS.characterVideoJimakuBackground.width,
   height: `${VIDEO_SETTINGS.subtitleHeightPx}px`,
-  bottom: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.bottom,
-  left: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.left,
-  backgroundImage: `url(${staticFile(VIDEO_SETTINGS.yukkuriVideoJimakuBackground.backgroundImage)})`,
-  backgroundPosition: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.backgroundPosition,
-  display: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.display,
-  alignItems: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.alignItems,
-  justifyContent: VIDEO_SETTINGS.yukkuriVideoJimakuBackground.justifyContent,
+  bottom: VIDEO_SETTINGS.characterVideoJimakuBackground.bottom,
+  left: VIDEO_SETTINGS.characterVideoJimakuBackground.left,
+  backgroundImage: `url(${staticFile(VIDEO_SETTINGS.characterVideoJimakuBackground.backgroundImage)})`,
+  backgroundPosition: VIDEO_SETTINGS.characterVideoJimakuBackground.backgroundPosition,
+  display: VIDEO_SETTINGS.characterVideoJimakuBackground.display,
+  alignItems: VIDEO_SETTINGS.characterVideoJimakuBackground.alignItems,
+  justifyContent: VIDEO_SETTINGS.characterVideoJimakuBackground.justifyContent,
   zIndex: zIndex.anyValue,
 };
 

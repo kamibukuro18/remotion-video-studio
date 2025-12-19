@@ -10,19 +10,19 @@ export const VIDEO_SETTINGS = {
   mouthCycleLength: 6,
   mabatakiIntervalSeconds: 5,
   mabatakiAnimationDurationFrames: 15,
-  yukkuriFaceImagePrefix: 'char/',
-  yukkuriFaceImageExtension: '.png',
-  yukkuriMouthImagePath: 'char/mouth/01.png',
-  yukkuriMabatakiAnimationThreshold1: 0.2,
-  yukkuriMabatakiAnimationThreshold2: 0.4,
-  yukkuriMabatakiAnimationThreshold3: 0.6,
-  yukkuriMabatakiAnimationThreshold4: 0.8,
-  yukkuriFaceMouthTop: '49.6%',
-  yukkuriFaceMouthLeft: '50%',
-  yukkuriFaceMouthWidth: '100%',
-  yukkuriSequenceCharacterRight: '-23%',
-  yukkuriSequenceCharacterBottom: '-750px',
-  yukkuriSequenceCharacterWidth: '67%',
+  characterFaceImagePrefix: 'char/',
+  characterFaceImageExtension: '.png',
+  characterMouthImagePath: 'char/mouth/01.png',
+  characterMabatakiAnimationThreshold1: 0.2,
+  characterMabatakiAnimationThreshold2: 0.4,
+  characterMabatakiAnimationThreshold3: 0.6,
+  characterMabatakiAnimationThreshold4: 0.8,
+  characterFaceMouthTop: '49.6%',
+  characterFaceMouthLeft: '50%',
+  characterFaceMouthWidth: '100%',
+  characterSequenceCharacterRight: '-23%',
+  characterSequenceCharacterBottom: '-750px',
+  characterSequenceCharacterWidth: '67%',
 
   // 字幕関連設定
   subtitleHeightPx: 110,
@@ -43,7 +43,7 @@ export const VIDEO_SETTINGS = {
   // 字幕背景関連設定
   subtitleBackgroundWidth: '100%',
   subtitleBackgroundBottom: 0,
-  yukkuriVideoJimakuBackground: {
+  characterVideoJimakuBackground: {
     width: 'calc(75%)',
     bottom: 25,
     left: 40,
@@ -54,22 +54,22 @@ export const VIDEO_SETTINGS = {
     justifyContent: 'center',
   },
 
-  // YukkuriVideo のルートスタイル
+  // CharacterVideo のルートスタイル
   videoBackground: {
     backgroundColor: '#000',
     backgroundImage: 'image/background.png',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
-  // YukkuriVideo の背景動画オーバーレイのスタイル
+  // CharacterVideo の背景動画オーバーレイのスタイル
   videoOverlay: {
     width: '100%',
     height: '100%',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     backdropFilter: 'blur(4px)',
   },
-  // YukkuriVideo のロゴスタイル (未使用のため削除)
-  // YukkuriVideo のVOICEVOXクレジットスタイル
+  // CharacterVideo のロゴスタイル (未使用のため削除)
+  // CharacterVideo のVOICEVOXクレジットスタイル
   voicevoxCreditStyle: {
     position: 'absolute',
     bottom: 20,
@@ -90,6 +90,6 @@ export const VIDEO_SETTINGS = {
 export const zIndex = {
   anyValue: 1,
   subtitle: 10,
-  yukkuri: 10,
+  character: 10,
   transitionMovie: 10000,
 } as const;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Composition } from 'remotion';
-import { YukkuriVideo } from './YukkuriVideo';
+import { CharacterVideo } from './CharacterVideo';
 import { getTotalVideoFrames } from './utils/getTotalVideoFrames';
 import { PlaygroundConfig } from '../transcripts/playground';
 import { VIDEO_SETTINGS } from './constants';
@@ -11,7 +11,7 @@ export const Root: React.FC = () => {
       
       <Composition
         id="Playground"
-        component={YukkuriVideo}
+        component={CharacterVideo}
         durationInFrames={getTotalVideoFrames(PlaygroundConfig)}
         fps={VIDEO_SETTINGS.fps}
         width={1920}

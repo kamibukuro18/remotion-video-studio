@@ -1,4 +1,4 @@
-import {VideoConfig} from '../yukkuri/yukkuriVideoConfig';
+import {VideoConfig} from '../character/characterVideoConfig';
 
 export function getTotalFramesBeforeSection(
 	videoConfig: VideoConfig,

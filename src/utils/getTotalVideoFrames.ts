@@ -1,4 +1,4 @@
-import {VideoConfig} from '../yukkuri/yukkuriVideoConfig';
+import {VideoConfig} from '../character/characterVideoConfig';
 
 export function getTotalVideoFrames(videoConfig: VideoConfig) {
 	return videoConfig.sections.reduce((prev, current) => {

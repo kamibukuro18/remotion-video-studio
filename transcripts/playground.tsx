@@ -1,4 +1,4 @@
-import { VideoConfig } from '../src/yukkuri/yukkuriVideoConfig';
+import { VideoConfig } from '../src/character/characterVideoConfig';
 
 // ==================== EDITABLE SECTION START ====================
 // この部分を編集してください。音声生成スクリプトを実行すると、
@@ -161,7 +161,7 @@ export const PLAYGROUND_TALKS: SimpleTalk[] = [
 // ==================== GENERATED SECTION START ====================
 
 // この部分は自動生成されます。直接編集しないでください。
-// 音声生成: npx ts-node scripts/generateYukkuriVoiceFiles.ts
+// 音声生成: npx ts-node scripts/generateCharacterVoiceFiles.ts
 
 export const PlaygroundConfig: VideoConfig = {
   "sections": [
@@ -200,7 +200,7 @@ export const PlaygroundConfig: VideoConfig = {
       "talks": [
         {
           "text": "みなさんこんにちは。今日は「宇宙の誕生」をテーマに、ビッグバン理論を分かりやすく解説していきます。",
-          "id": "f4a64c8530de4912be91ec8d548ffaa6",
+          "id": "2260c2d7f7434a22990b788485c4ad18",
           "audioDurationFrames": 268,
           "image": {
             "src": "/slides/1.png"
@@ -208,7 +208,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "まずは宇宙がどのように始まったのか、その全体像を図でざっくり見ていきましょう。",
-          "id": "5388e04f938e4ff98d30c4d9a76c0b16",
+          "id": "9a1ad27e96804b60a02157efdfe37090",
           "audioDurationFrames": 190,
           "image": {
             "src": "/slides/1.png"
@@ -216,7 +216,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "宇宙の始まりについてはさまざまな仮説がありますが、現在もっとも有力なのがビッグバン理論です。",
-          "id": "cada0760e6a242e187904019cbd0b218",
+          "id": "ad87b5db51e44a0b995f3bf2c41dd014",
           "audioDurationFrames": 231,
           "image": {
             "src": "/slides/2.png"
@@ -224,7 +224,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "この理論を関係図として整理すると、誕生 → 膨張 → 冷却 → 星と銀河の形成、という流れになります。",
-          "id": "241c273101df4ef4a20500dd3e11b12f",
+          "id": "3629bbb006954c049de1c4831c3ba5fd",
           "audioDurationFrames": 292,
           "image": {
             "src": "/slides/2.png"
@@ -232,7 +232,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "実際の観測データをスクリーンショット風に見てみると、遠くの銀河ほど速く遠ざかっていることがわかります。",
-          "id": "1d11ff74e7bc4e7fb40df9d5b7041ee3",
+          "id": "697f76643a6f475fb1203dc9b61519e8",
           "audioDurationFrames": 251,
           "image": {
             "src": "/slides/3.png"
@@ -240,7 +240,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "これは宇宙全体が膨張している証拠なんですね。",
-          "id": "c80981b2876d4c14bda11fd44b763aec",
+          "id": "0ee23e6fab5f47a1a0abf21915b60781",
           "audioDurationFrames": 117,
           "image": {
             "src": "/slides/3.png"
@@ -248,7 +248,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "ここでビッグバンとは何かを簡単に整理します。",
-          "id": "f1c314a0148f422088136113a70b95fd",
+          "id": "e6726744f2f44167856d96519f33ff5a",
           "audioDurationFrames": 111,
           "image": {
             "src": "/slides/4.png"
@@ -256,7 +256,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "イラストで示すと、「ものすごく高温高密度な一点から一気に膨張した」状態がスタートです。",
-          "id": "9425dc353c5a429c8f933f6ad5d80df5",
+          "id": "59e623a0b8124406b7b1d1a0e5f9257d",
           "audioDurationFrames": 228,
           "seSounds": [
             {
@@ -269,7 +269,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "この膨張は爆発というより、空間そのものが広がるイメージです。",
-          "id": "c877bfce207a4a1e886d493c3241310c",
+          "id": "a711cfa7b6994904804df560f1ab30d7",
           "audioDurationFrames": 163,
           "image": {
             "src": "/slides/5.png"
@@ -277,7 +277,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "この構造を視覚的に見ると、風船が膨らむように「空間が伸びる」という形で説明できます。",
-          "id": "698943fc072e4ed9afb945657247c806",
+          "id": "0cb5108a6d1544e1948671b5fbaad49f",
           "audioDurationFrames": 255,
           "image": {
             "src": "/slides/5.png"
@@ -285,7 +285,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "宇宙誕生からの流れは大きく3つのステップに分けられます。",
-          "id": "efad92671a1e4a4a82886ccac5824698",
+          "id": "457f5a72841a4631a247f52587137572",
           "audioDurationFrames": 139,
           "image": {
             "src": "/slides/6.png"
@@ -293,7 +293,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "第一に「急膨張(インフレーション)」、第二に「冷却と物質の誕生」、第三に「星と銀河の形成」です。",
-          "id": "ba5f6ae8896b4e85a3e8523f08cdd8fc",
+          "id": "97117ff66b1d4d3cadc7b543c315564a",
           "audioDurationFrames": 331,
           "image": {
             "src": "/slides/6.png"
@@ -301,7 +301,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "まずインフレーションについて。ここは図解で確認すると、一瞬で宇宙が桁違いに大きくなるプロセスです。",
-          "id": "2795651ef6974663915f8c9fd99b5eff",
+          "id": "f573f94691464cf4bea0dd07a8d871c1",
           "audioDurationFrames": 253,
           "image": {
             "src": "/slides/7.png"
@@ -309,7 +309,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "ほんの0.000…1秒の間に、宇宙はとてつもなく膨張しました。",
-          "id": "4380630fb20d4b3383099d5dee9c9783",
+          "id": "8da1f44488e34b219de4fb8b4832d67a",
           "audioDurationFrames": 202,
           "seSounds": [
             {
@@ -322,7 +322,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "次に冷却の段階。温度が下がることで素粒子が結びつき、原子が誕生します。",
-          "id": "b1a58aece49d4d319ab81fae440d7922",
+          "id": "03137d6352b347fe8ea81e3b59e6cb35",
           "audioDurationFrames": 212,
           "image": {
             "src": "/slides/8.png"
@@ -330,7 +330,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "この過程を関係図として見ると、温度低下 → 粒子結合 → 原子形成、という流れになります。",
-          "id": "eeff45c7e00544139532526cee7a042e",
+          "id": "1e78cd7cd0704f8098329202f410240b",
           "audioDurationFrames": 260,
           "image": {
             "src": "/slides/8.png"
@@ -338,7 +338,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "そして星と銀河の形成。ガスが集まり、重力によって星が生まれ、さらに集まって銀河になります。",
-          "id": "060b24a10e55402fad66af2c543b34cd",
+          "id": "01c5b84549ab4248b976a7e82f677c15",
           "audioDurationFrames": 260,
           "image": {
             "src": "/slides/9.png"
@@ -346,7 +346,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "イラストで表すと、ガスが雲のようにまとまり、光る星が点々と生まれていくイメージです。",
-          "id": "23ad2b6050eb4059879629fdf4020117",
+          "id": "8bdc06088bbf4862976b68aec5845cb6",
           "audioDurationFrames": 217,
           "image": {
             "src": "/slides/9.png"
@@ -354,7 +354,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "ビッグバン理論には代表的な3つの証拠があります。",
-          "id": "1601b4b2ba364e4eb8aa4e12d892d7c2",
+          "id": "59407c6d7a1b4d3aa5b45c925736ff77",
           "audioDurationFrames": 124,
           "image": {
             "src": "/slides/10.png"
@@ -362,7 +362,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "「宇宙の膨張」「宇宙背景放射」「元素の割合」の3つです。",
-          "id": "baaa13d30f454afe917bd802406dae36",
+          "id": "59c36c0bd81043cab97074221d6c1a4c",
           "audioDurationFrames": 180,
           "image": {
             "src": "/slides/10.png"
@@ -370,7 +370,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "宇宙背景放射は、宇宙全体に広がる微弱な電波で、ビッグバンの残り火のようなもの。",
-          "id": "e4b3dbab61824096a5bb57c070dbc31e",
+          "id": "62828568a3d541e08d60431fdade9591",
           "audioDurationFrames": 228,
           "image": {
             "src": "/slides/11.png"
@@ -378,7 +378,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "実際の観測画面を見ると、微妙な温度差が色分けされて表示されます。",
-          "id": "6541cdd29ade4b80b97a935d646dc87c",
+          "id": "646440b556a94e40b5faa74bda546dd6",
           "audioDurationFrames": 184,
           "image": {
             "src": "/slides/11.png"
@@ -386,7 +386,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "今日はビッグバン理論を、図解やイラストを交えながら整理してきました。",
-          "id": "38250955bc1b43a4a5b36cf2b27799da",
+          "id": "cbffe68f91a74f32aaa62f7a42865257",
           "audioDurationFrames": 168,
           "image": {
             "src": "/slides/12.png"
@@ -394,7 +394,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "宇宙は一点から始まり、膨張し続け、今も広がり続けています。",
-          "id": "25470c01600a46ccb21e73effd7f5736",
+          "id": "7000975a585247f0bb253cb668d04642",
           "audioDurationFrames": 185,
           "image": {
             "src": "/slides/12.png"
@@ -402,7 +402,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "この壮大なテーマは、まだまだ解明されていない謎も多い分野です。",
-          "id": "ae2e4cb6a1514f4a9a9155c9d56989d3",
+          "id": "f5fd7cb2e79d4e46bc3fbdfc3525c140",
           "audioDurationFrames": 162,
           "image": {
             "src": "/slides/13.png"
@@ -410,7 +410,7 @@ export const PlaygroundConfig: VideoConfig = {
         },
         {
           "text": "今後の観測技術の進歩によって、宇宙の本当の始まりにさらに近づくかもしれません。",
-          "id": "91914f0ebe6d468486bf6e15ec1998be",
+          "id": "d27b483a63014e9c917a6fd0b8707895",
           "audioDurationFrames": 217,
           "image": {
             "src": "/slides/13.png"
@@ -418,15 +418,15 @@ export const PlaygroundConfig: VideoConfig = {
         }
       ],
       "totalFrames": 5782,
-      "kuchipakuMap": {
+      "characterLipSyncMap": {
         "frames": [],
         "amplitude": []
       },
-      "reimuKuchipakuMap": {
+      "reimuLipSyncMap": {
         "frames": [],
         "amplitude": []
       },
-      "marisaKuchipakuMap": {
+      "marisaLipSyncMap": {
         "frames": [],
         "amplitude": []
       },
