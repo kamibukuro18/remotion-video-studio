@@ -50,7 +50,9 @@ function getTextHash(text: string): string {
   // もち子さん=20
   // 剣崎雌雄=21
   // あいえるたん=22
-  const SPEAKER_ID = 3; // Zundamon
+  const { VIDEO_SETTINGS } = await import('../src/constants');
+  const SPEAKER_ID = VIDEO_SETTINGS.voicevoxSpeakerId;
+  const VOICE_SPEED = VIDEO_SETTINGS.voicevoxSpeed;
 
   for (const talk of talks) {
     const textHash = getTextHash(talk.text);
@@ -68,7 +70,7 @@ function getTextHash(text: string): string {
 
       try {
         console.log(`Generating audio: ${talk.text.substring(0, 30)}...`);
-        await generateVoicevoxAudio(talk.text, SPEAKER_ID, filepath);
+        await generateVoicevoxAudio(talk.text, SPEAKER_ID, VOICE_SPEED, filepath);
 
         // Get duration
         const { getAudioDurationInSeconds } = require('get-audio-duration');

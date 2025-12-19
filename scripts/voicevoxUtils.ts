@@ -7,6 +7,7 @@ const VOICEVOX_URL = 'http://127.0.0.1:50021';
 export async function generateVoicevoxAudio(
   text: string,
   speakerId: number,
+  speed: number,
   filepath: string
 ): Promise<void> {
   try {
@@ -27,7 +28,11 @@ export async function generateVoicevoxAudio(
           }
           let data = '';
           res.on('data', (chunk) => (data += chunk));
-          res.on('end', () => resolve(JSON.parse(data)));
+          res.on('end', () => {
+            const parsedData = JSON.parse(data);
+            parsedData.speedScale = speed;
+            resolve(parsedData);
+          });
         }
       );
       req.on('error', reject);

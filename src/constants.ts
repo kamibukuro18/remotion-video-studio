@@ -24,6 +24,10 @@ export const VIDEO_SETTINGS = {
   characterSequenceCharacterBottom: '-750px',
   characterSequenceCharacterWidth: '67%',
 
+  // 音声関連設定
+  voicevoxSpeakerId: 3,
+  voicevoxSpeed: 1,
+
   // 字幕関連設定
   subtitleHeightPx: 110,
   subtitleMaxLength: 62,
