@@ -85,6 +85,7 @@ export const VIDEO_SETTINGS = {
   slideLeft: 40, // スライドの左端からの位置 (ピクセル)
   slideHeight: 'calc(100% - 110px)', // スライドの高さ
   slideWidth: 'calc(85% - 80px)', // スライドの幅
+  slideImagePadding: '40px', // スライド画像の内部パディング
 
   // CharacterVideo のVOICEVOXクレジットスタイル
   voicevoxCreditStyle: { // VOICEVOXクレジットのスタイル

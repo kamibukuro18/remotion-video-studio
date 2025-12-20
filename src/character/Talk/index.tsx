@@ -167,7 +167,7 @@ const imagePosition: React.CSSProperties = {
 
 const imageStyle: React.CSSProperties = {
   objectFit: 'contain',
-  padding: '40px',
+  padding: VIDEO_SETTINGS.slideImagePadding,
   width: '100%',
   height: '100%',
 };
