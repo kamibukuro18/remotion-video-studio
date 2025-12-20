@@ -13,6 +13,7 @@ type Image = {
 	src: string;
 	from?: number;
 	backgroundColor?: string;
+	durationInFrames?: number; // MP4の場合のdurationを指定できるように追加
 };
 
 type Audio = {

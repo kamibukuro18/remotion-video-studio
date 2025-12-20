@@ -126,8 +126,22 @@ function getTextHash(text: string): string {
     };
 
     if (talk.videoIndex !== undefined) {
-      const slideImagePath = `/slides/${talk.videoIndex}.png`; // 動的にスライド画像を読み込む (slide_X.png -> X.png)
-      voiceConfig.image = { src: slideImagePath };
+      const videoPath = `./public/slides/${talk.videoIndex}.mp4`;
+      const imagePath = `./public/slides/${talk.videoIndex}.png`;
+      
+      let finalSrc: string;
+      let durationInFrames: number | undefined;
+
+      if (fs.existsSync(videoPath)) {
+        finalSrc = `/slides/${talk.videoIndex}.mp4`;
+        durationInFrames = VIDEO_SETTINGS.defaultVideoDurationFrames;
+      } else if (fs.existsSync(imagePath)) {
+        finalSrc = `/slides/${talk.videoIndex}.png`;
+      } else {
+        console.warn(`Warning: Neither ${videoPath} nor ${imagePath} found for videoIndex ${talk.videoIndex}`);
+        continue; // 画像も動画も見つからない場合はスキップ
+      }
+      voiceConfig.image = { src: finalSrc, durationInFrames: durationInFrames };
     }
 
     voiceConfigs.push(voiceConfig);

@@ -4,6 +4,7 @@ export const VIDEO_SETTINGS = {
   talkGapFrames: 25, // セリフ間のデフォルトの間隔 (フレーム数)
   defaultSectionInitialDelayFrames: 30, // 各セクションの開始時のデフォルト遅延 (フレーム数)
   defaultSectionEndFrames: 30, // 各セクションの終了時のデフォルト遅延 (フレーム数)
+  defaultVideoDurationFrames: 150, // デフォルトの動画の長さ (フレーム数)
 
   videoTitle: 'Playground', // 動画のタイトル
 

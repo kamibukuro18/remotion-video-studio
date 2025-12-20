@@ -86,7 +86,15 @@ export const Talk: React.FC<TalkProps> = ({ voiceConfig, from, meta }) => {
               backgroundColor: voiceConfig.image.backgroundColor,
             }}
           >
-            <Img src={staticFile(voiceConfig.image.src)} style={imageStyle} />
+            {voiceConfig.image.src.endsWith('.mp4') ? (
+              <OffthreadVideo
+                muted
+                src={staticFile(voiceConfig.image.src)}
+                style={imageStyle}
+              />
+            ) : (
+              <Img src={staticFile(voiceConfig.image.src)} style={imageStyle} />
+            )}
           </div>
         </Sequence>
       )}
