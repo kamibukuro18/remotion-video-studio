@@ -69,165 +69,85 @@ npm run build
 
 ### 1. プロジェクト共通設定 (`src/constants.ts`)
 
-このファイルは、動画全体の挙動や表示に関する基本的な定数を定義しています。
+`src/constants.ts` は、動画全体の挙動や表示に関する**全て**の定数を定義する中心的なファイルです。
+キャラクターの見た目（口パク、目の差分）、テロップの位置・フォント、スライドの位置、合成音声設定、背景・フレームなどの画像素材に関する設定がここに集約されています。
+このファイルを編集することで、動画の様々な要素を柔軟に調整できます。
+各設定項目には詳細なコメントが追加されており、その目的と影響範囲が説明されています。
 
-*   **`fps` (Number)**
-    *   **説明**: 1秒あたりのフレーム数。動画の滑らかさに影響します。
-    *   **影響**:
-        *   動画全体の再生速度。
-        *   アニメーションの速度（例: まばたき、口パク）。
-    *   **調整箇所**: `src/constants.ts`
+主な設定カテゴリは以下の通りです。
 
-*   **`talkGapFrames` (Number)**
-    *   **説明**: 各セリフ間のデフォルトの間隔（フレーム数）。
-    *   **影響**:
-        *   セリフとセリフの間の空白時間。
-    *   **調整箇所**: `src/constants.ts`
+*   **グローバルな動画設定**: `fps` (フレームレート), `talkGapFrames` (セリフ間の間隔), `defaultSectionInitialDelayFrames` (セクション開始遅延), `defaultSectionEndFrames` (セクション終了遅延), `videoTitle` (動画タイトル), `defaultVideoDurationFrames` (デフォルト動画長さ)
+*   **BGM関連設定**: `defaultBgmSrc` (デフォルトBGMパス), `defaultBgmVolume` (デフォルトBGM音量)
+*   **キャラクター関連設定**: キャラクターのサイズ、口や目の位置、まばたきアニメーションの閾値など。
+*   **音声関連設定**: `voicevoxSpeakerId` (話者ID), `voicevoxSpeed` (話速)
+*   **字幕関連設定**: 字幕の高さ、最大文字数、行の高さ、フォント、色、位置、パディングなど。
+*   **字幕背景関連設定**: 字幕背景の幅、位置、画像パスなど。
+*   **動画背景関連設定**: 動画全体の背景色、背景画像、オーバーレイなど。
+*   **スライド関連設定**: スライドの位置とサイズ。
+*   **VOICEVOXクレジットスタイル**: クレジットの表示位置、フォント、色など。
+*   **`zIndex`**: 各要素の重なり順序。
 
-*   **`subtitleHeightPx` (Number)**
-    *   **説明**: 字幕エリアの高さ（ピクセル）。
-    *   **影響**:
-        *   字幕背景の高さ。
-        *   字幕テキストが配置される領域の高さ。
-    *   **調整箇所**: `src/constants.ts`
+**変更の影響**: これらの設定は、関連するRemotionコンポーネント (`CharacterVideo.tsx`, `CharacterSequence.tsx`, `CharacterFace.tsx`, `Subtitle/Subtitle.tsx`, `Subtitle/SubtitleBackground.tsx`, `character/Talk/index.tsx` など) で参照されており、値を変更することで動画の見た目や挙動に直接影響を与えます。
 
-*   **`subtitleFontSize` (Number)**
-    *   **説明**: 字幕のフォントサイズ（ピクセル）。
-    *   **影響**:
-        *   字幕テキストの大きさ。
-    *   **調整箇所**: `src/constants.ts`
-
-*   **`subtitleLineHeight` (Number)**
-    *   **説明**: 字幕の行の高さ（line-height）。
-    *   **影響**:
-        *   改行された字幕テキストの行間の広さ。
-    *   **調整箇所**: `src/constants.ts`
-
-*   **`subtitleMaxLength` (Number)**
-    *   **説明**: 字幕の自動改行文字数。全角文字は2文字としてカウントされます。
-    *   **影響**:
-        *   字幕の1行に表示される文字数。
-    *   **調整箇所**: `src/constants.ts`
-
-*   **`defaultSectionInitialDelayFrames` (Number)**
-    *   **説明**: 各セクション開始時のデフォルト遅延（フレーム数）。
-    *   **影響**:
-        *   各セクションの開始前の空白時間。
-    *   **調整箇所**: `src/constants.ts`
-
-*   **`defaultSectionEndFrames` (Number)**
-    *   **説明**: 各セクション終了時のデフォルト遅延（フレーム数）。
-    *   **影響**:\
-        *   各セクションの終了後の空白時間。
-    *   **調整箇所**: `src/constants.ts`
-
-*   **`characterWidthPercentage` (Number)**
-    *   **説明**: キャラクターの画面占有幅の割合（例: 0.15は15%）。
-    *   **影響**:
-        *   キャラクターの横幅。
-    *   **調整箇所**: `src/constants.ts`, `src/yukkuri/Talk/index.tsx` (画像の位置計算に使用)
-
-*   **`mouthCycleLength` (Number)**
-    *   **説明**: 口パクの1周期の長さ（フレーム数）。例: 6フレームなら3フレーム開いて3フレーム閉じる。
-    *   **影響**:
-        *   口が開閉する速度。
-    *   **調整箇所**: `src/constants.ts`
-
-*   **`mabatakiIntervalSeconds` (Number)**
-    *   **説明**: まばたきの間隔（秒）。
-    *   **影響**:
-        *   キャラクターのまばたきの頻度。
-    *   **調整箇所**: `src/constants.ts`
-
-*   **`mabatakiAnimationDurationFrames` (Number)**
-    *   **説明**: まばたきアニメーションの総フレーム数。
-    *   **影響**:
-        *   まばたきアニメーションの長さと滑らかさ。
-    *   **調整箇所**: `src/constants.ts`
-
-*   **`zIndex` (Object)**
-    *   **説明**: 各要素の重なり順序。数値が大きいほど手前に表示されます。
-    *   **影響**:
-        *   字幕、キャラクター、トランジションムービーなどの表示順序。
-    *   **調整箇所**: `src/constants.ts`, `src/YukkuriVideo.tsx`, `src/Subtitle/SubtitleBackground.tsx`, `src/yukkuri/Face/YukkuriFace.tsx`, `src/yukkuri/YukkuriSequence.tsx`
+**BGM設定に関する注意点**:
+BGMの音量やソースを変更する場合、`src/constants.ts` を編集し、Remotionプレビューを再起動するだけで変更が反映されます。**音声ファイルを再生成する必要はありません。**
 
 ---
 
-### 2. メイン動画コンポーネント (`src/YukkuriVideo.tsx`)
+### 2. コンテンツ定義 (`transcripts/playground.tsx`)
 
-動画の全体的なレイアウトと、字幕背景の位置・サイズを制御します。
-
-*   **`jimakuBackground` (CSSProperties)**
-    *   **説明**: 字幕背景のスタイル。
-    *   **影響**:
-        *   字幕背景の幅 (`width`)、高さ (`height`)、画面下部からの位置 (`bottom`)、画面左部からの位置 (`left`)。
-        *   背景画像 (`backgroundImage`)、その配置 (`backgroundPosition`)。
-    *   **調整箇所**: `src/YukkuriVideo.tsx` 内の `jimakuBackground` 定数。
-
----
-
-### 3. 字幕背景コンポーネント (`src/Subtitle/SubtitleBackground.tsx`)
-
-字幕背景エリアの内部で、字幕テキストがどのように配置されるかを制御します。
-
-*   **`jimakuBackground` (CSSProperties)**
-    *   **説明**: `YukkuriVideo.tsx` で定義された字幕背景エリアの内側で、字幕テキストを配置するためのコンテナのスタイル。
-    *   **影響**:
-        *   テキストの垂直方向の配置 (`alignItems`: `center`, `flex-start`など)。
-        *   テキストの水平方向の配置 (`justifyContent`: `center`, `flex-start`など)。
-    *   **調整箇所**: `src/Subtitle/SubtitleBackground.tsx` 内の `jimakuBackground` 定数。
-
----
-
-### 4. 字幕テキストコンポーネント (`src/Subtitle/Subtitle.tsx`)
-
-実際の字幕テキストの見た目と、そのコンテナ内での微調整を行います。
-
-*   **`baseSubtitleStyle` (CSSProperties)**
-    *   **説明**: 字幕テキストの基本的なスタイル。
-    *   **影響**:
-        *   フォントサイズ (`fontSize`)、太さ (`fontWeight`)、行の高さ (`lineHeight`)、文字間隔 (`letterSpacing`)。
-        *   テキストコンテナ内での位置 (`top`, `left`)、パディング (`paddingTop`, `paddingLeft`)。
-        *   テキストのアウトライン (`WebkitTextStroke` は `strokeSubtitleStyle` で定義)。
-    *   **調整箇所**: `src/Subtitle/Subtitle.tsx` 内の `baseSubtitleStyle` 定数。
-
-*   **`strokeSubtitleStyle`, `fillSubtitleStyle` (CSSProperties)**
-    *   **説明**: 字幕のアウトラインと塗りつぶし部分のスタイル。
-    *   **影響**:\
-        *   アウトラインの色と太さ (`WebkitTextStroke`)。
-    *   **調整箇所**: `src/Subtitle/Subtitle.tsx` 内の `strokeSubtitleStyle`, `fillSubtitleStyle` 定数。
-
----
-
-### 5. Yukkuriシーケンスコンポーネント (`src/yukkuri/YukkuriSequence.tsx`)
-
-キャラクター全体の表示位置とサイズを制御します。
-
-*   **`characterStyle` (CSSProperties)**
-    *   **説明**: キャラクター画像全体を配置する `div` のスタイル。
-    *   **影響**: 
-        *   キャラクターの画面右端からの位置 (`right`)、画面下部からの位置 (`bottom`)。
-        *   キャラクターの幅 (`width`)、高さ (`height`)。
-    *   **調整箇所**: `src/yukkuri/YukkuriSequence.tsx` 内の `characterStyle` 定数。
-
----
-
-### 6. プレイグラウンド設定 (`transcripts/playground.tsx`)
-
-動画のコンテンツ（テキスト、BGM、画像など）を定義します。
-
-*   **`PLAYGROUND_SETTINGS` (Object)**
-    *   **説明**: 動画全体のタイトル、BGMのソース、BGMのボリュームなどの設定。
-    *   **影響**:
-        *   動画のタイトル。
-        *   動画のBGMのファイルパスと音量。
-    *   **調整箇所**: `transcripts/playground.tsx` 内の `PLAYGROUND_SETTINGS` 定数。
+このファイルは、動画の具体的なコンテンツ（セリフ、スライド、効果音など）を定義します。
 
 *   **`PLAYGROUND_TALKS` (Array of SimpleTalk)**
-    *   **説明**: 各セリフのテキスト、次のセリフまでの遅延時間、表示する画像（`videoIndex`経由）、効果音などを定義します。
+    *   **説明**: 各セリフのテキスト、次のセリフまでの遅延時間、表示する画像/動画 (`videoIndex`経由)、効果音などを定義します。
     *   **影響**:
         *   動画のストーリーとセリフの内容。
         *   セリフ間の間隔。
-        *   セリフに合わせて表示される画像（スライド）。
+        *   セリフに合わせて表示される画像や動画。
         *   再生される効果音。
+    *   **`videoIndex` の自動判別**:
+        `videoIndex` に数字 (`1`, `2` など) を指定すると、`scripts/generateCharacterVoiceFiles.ts` が以下の優先順位でメディアファイルを自動的に判別します。
+        1.  `public/slides/{videoIndex}.mp4` が存在すれば、動画として使用します。（`durationInFrames` は `VIDEO_SETTINGS.defaultVideoDurationFrames` が適用されます。）
+        2.  `public/slides/{videoIndex}.mp4` が存在しない場合、`public/slides/{videoIndex}.png` が存在すれば、画像として使用します。
     *   **調整箇所**: `transcripts/playground.tsx` 内の `PLAYGROUND_TALKS` 定数。
+
+---
+
+### 3. 音声・動画ファイルの生成と更新 (`scripts/generateCharacterVoiceFiles.ts`)
+
+このスクリプトは、`transcripts/playground.tsx` に記述されたテキストデータに基づいて、Voicevox音声ファイルや動画情報を生成し、`transcripts/playground.tsx` の `GENERATED SECTION` を更新します。
+
+*   **コマンド**:
+    *   `npm run gen-voice`: 音声ファイルを生成し、`playground.tsx` を更新します。
+    *   `npm run gen-voice:watch`: `playground.tsx` の変更を監視し、保存時に自動で音声生成を行います。
+*   **Forceオプション**:
+    キャッシュを無視して全ての音声ファイルを強制的に再生成する場合、またはBGM設定の変更などを `GENERATED SECTION` に一度だけ反映させたい場合は、以下のコマンドを使用します。
+    ```console
+    npx ts-node scripts/generateCharacterVoiceFiles.ts force
+    ```
+*   **音声のカスタマイズ**: `src/constants.ts` の `voicevoxSpeakerId` と `voicevoxSpeed` を変更することで、話者や話速を調整できます。変更後に上記コマンドを実行してください。
+
+---
+
+### 4. プロジェクトのクリーニング
+
+不要なキャッシュや生成ファイルを削除し、クリーンな状態に戻すためのコマンドです。
+
+*   `npm run clean`: 音声キャッシュ (`transcripts/playground-audio-cache.json`) や生成された音声ファイル (`public/audio/character/`) を削除します。これにより、次回の音声生成が最初から行われます。
+
+---
+
+## 開発履歴と変更点
+
+*   **`src/constants.ts` による一元的な設定管理**
+    *   キャラクターの見た目（口パク、目の差分）、テロップの位置・フォント、スライドの位置、合成音声設定、背景・フレームなどの画像素材が `src/constants.ts` で設定可能になりました。
+    *   各設定項目に詳細なコメントを追加し、可読性と変更の容易性を向上させました。
+*   **BGMの音量・ソース設定の分離**
+    *   BGMの音量やソースの変更が、音声ファイルの再生成なしに `src/constants.ts` の編集とRemotionプレビューの再起動で可能になりました。
+    *   音声生成コマンドとBGM更新コマンドが完全に分離されました。
+*   **動画 (MP4) の自動判別とインポート**
+    *   `transcripts/playground.tsx` の `videoIndex` に数字を指定するだけで、`public/slides/` に対応する `.mp4` ファイルがあれば動画として、なければ `.png` ファイルとして自動的に読み込まれるようになりました。
+*   **「yukkuri」から「character」への名称変更**
+    *   プロジェクト全体で「yukkuri」という名称を「character」に変更し、ファイル名、ディレクトリ名、コード内の参照を更新しました。
+*   **`config.ts` の削除**
+    *   未使用の `config.ts` ファイルを削除しました。
