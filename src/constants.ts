@@ -5,6 +5,12 @@ export const VIDEO_SETTINGS = {
   defaultSectionInitialDelayFrames: 30, // 各セクションの開始時のデフォルト遅延 (フレーム数)
   defaultSectionEndFrames: 30, // 各セクションの終了時のデフォルト遅延 (フレーム数)
 
+  videoTitle: 'Playground', // 動画のタイトル
+
+  // BGM関連設定
+  defaultBgmSrc: '/audio/bgm/2_23_AM_2.mp3', // デフォルトBGMのパス
+  defaultBgmVolume: 0.05, // デフォルトBGMの音量 (0.0〜1.0)　変更後は    npx ts-node scripts/generateCharacterVoiceFiles.ts force を実行してください
+
   // キャラクター関連設定
   characterWidthPercentage: 0.15, // キャラクターの幅の割合 (画面全体に対する比率)
   mouthCycleLength: 6, // 口パクの1周期の長さ (フレーム数)。例: 6フレームなら3フレーム開いて3フレーム閉じる
@@ -72,8 +78,6 @@ export const VIDEO_SETTINGS = {
     backgroundColor: 'rgba(0, 0, 0, 0.4)', // オーバーレイの背景色 (半透明の黒)
     backdropFilter: 'blur(4px)', // オーバーレイの背景のぼかし効果
   },
-  
-  // CharacterVideo のVOICEVOXクレジットスタイル
 
   // スライド関連設定
   slideTop: 0, // スライドの上端からの位置 (ピクセル)
@@ -81,6 +85,7 @@ export const VIDEO_SETTINGS = {
   slideHeight: 'calc(100% - 110px)', // スライドの高さ
   slideWidth: 'calc(85% - 80px)', // スライドの幅
 
+  // CharacterVideo のVOICEVOXクレジットスタイル
   voicevoxCreditStyle: { // VOICEVOXクレジットのスタイル
     position: 'absolute', // 絶対位置指定
     bottom: 20, // 下端からの位置

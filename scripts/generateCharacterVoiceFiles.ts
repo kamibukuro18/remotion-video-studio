@@ -26,7 +26,9 @@ function getTextHash(text: string): string {
   // Import config
   const playgroundModule = await import('../transcripts/playground');
   const talks = playgroundModule.PLAYGROUND_TALKS;
-  const settings = playgroundModule.PLAYGROUND_SETTINGS;
+  // const settings = playgroundModule.PLAYGROUND_SETTINGS;
+  
+  const { VIDEO_SETTINGS } = await import('../src/constants');
 
   // Load existing cache
   let audioCache: AudioCache = {};
@@ -50,7 +52,6 @@ function getTextHash(text: string): string {
   // もち子さん=20
   // 剣崎雌雄=21
   // あいえるたん=22
-  const { VIDEO_SETTINGS } = await import('../src/constants');
   const SPEAKER_ID = VIDEO_SETTINGS.voicevoxSpeakerId;
   const VOICE_SPEED = VIDEO_SETTINGS.voicevoxSpeed;
 
@@ -138,9 +139,7 @@ function getTextHash(text: string): string {
   const playgroundConfig = {
     sections: [
       {
-        title: settings.title,
-        bgmSrc: settings.bgmSrc,
-        bgmVolume: settings.bgmVolume,
+        title: VIDEO_SETTINGS.videoTitle,
         fromFramesMap,
         talks: voiceConfigs,
         totalFrames: currentFrame + 60,

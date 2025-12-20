@@ -36,14 +36,11 @@ export const CharacterVideo: React.FC<{
                 section.totalFrames - (section.afterMovieFrames || 0)
               )}
             >
-              {section.bgmSrc && (
-                // @ts-ignore
-                <Audio
-                  loop
-                  src={staticFile(section.bgmSrc)}
-                  volume={Number(section.bgmVolume || 1)}
-                />
-              )}
+              <Audio
+                loop
+                src={staticFile(section.bgmSrc ?? VIDEO_SETTINGS.defaultBgmSrc)}
+                volume={Number(section.bgmVolume ?? VIDEO_SETTINGS.defaultBgmVolume)}
+              />
               {section.backgroundVideo && (
                 <>
                   <LoopedOffthreadVideo
