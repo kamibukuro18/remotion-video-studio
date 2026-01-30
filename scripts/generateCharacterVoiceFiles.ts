@@ -105,6 +105,7 @@ function getTextHash(text: string): string {
   const voiceConfigs: any[] = [];
   const fromFramesMap: { [key: number]: number } = {};
   let currentFrame = 30;
+  let lastSlide: { src: string; durationInFrames?: number } | null = null;
 
   for (let index = 0; index < talks.length; index++) {
     const talk = talks[index];
@@ -142,6 +143,10 @@ function getTextHash(text: string): string {
         continue; // 画像も動画も見つからない場合はスキップ
       }
       voiceConfig.image = { src: finalSrc, durationInFrames: durationInFrames };
+      lastSlide = voiceConfig.image;
+    } else if (lastSlide) {
+      // videoIndex が未指定のときは直前のスライドを引き継ぐ
+      voiceConfig.image = lastSlide;
     }
 
     voiceConfigs.push(voiceConfig);

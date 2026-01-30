@@ -33,7 +33,7 @@ export const VIDEO_SETTINGS = {
 
   // 音声関連設定
   voicevoxSpeakerId: 3, // VoiceVox の話者ID (詳細: scripts/voicevoxUtils.ts のコメント参照)
-  voicevoxSpeed: 1, // VoiceVox の話速 (1.0が標準)
+  voicevoxSpeed: 1.3, // VoiceVox の話速 (1.0が標準)
 
   // 字幕関連設定
   subtitleHeightPx: 110, // 字幕エリアの高さ (ピクセル)
