@@ -39,6 +39,37 @@ const getBackgroundVideoDuration = (
   return duration;
 };
 
+const isSameImageSlide = (
+  a?: VoiceConfig['image'],
+  b?: VoiceConfig['image'],
+) => {
+  if (!a || !b) {
+    return false;
+  }
+  return a.src === b.src && a.backgroundColor === b.backgroundColor;
+};
+
+const getImageDuration = (
+  currentTalk: VoiceConfig,
+  talks: VoiceConfig[],
+  index: number,
+) => {
+  if (!currentTalk.image) {
+    return 1;
+  }
+
+  let duration = getDurationInFrames(currentTalk);
+
+  for (let i = index + 1; i < talks.length; i++) {
+    if (!isSameImageSlide(currentTalk.image, talks[i].image)) {
+      break;
+    }
+    duration += getDurationInFrames(talks[i]);
+  }
+
+  return duration;
+};
+
 export const Talk: React.FC<TalkProps> = ({ voiceConfig, from, meta }) => {
   const hasAudio = Boolean(voiceConfig.id) || Boolean(voiceConfig.ids);
 
@@ -47,6 +78,13 @@ export const Talk: React.FC<TalkProps> = ({ voiceConfig, from, meta }) => {
     : null;
 
   const durationInFrames = getDurationInFrames(voiceConfig);
+  const previousTalk = meta.index > 0 ? meta.talks[meta.index - 1] : undefined;
+  const shouldRenderImage =
+    Boolean(voiceConfig.image) &&
+    !isSameImageSlide(previousTalk?.image, voiceConfig.image);
+  const imageDurationInFrames = shouldRenderImage
+    ? getImageDuration(voiceConfig, meta.talks, meta.index)
+    : 1;
 
   const subtitleText = insertLineBreaks(voiceConfig.textForDisplay || voiceConfig.text, 67); // ここで自動改行を適用
 
@@ -75,9 +113,9 @@ export const Talk: React.FC<TalkProps> = ({ voiceConfig, from, meta }) => {
           </Sequence>
         ))}
 
-      {voiceConfig.image && (
+      {shouldRenderImage && voiceConfig.image && (
         <Sequence
-          durationInFrames={Math.max(1, durationInFrames)}
+          durationInFrames={Math.max(1, imageDurationInFrames)}
           from={(from || 0) + (voiceConfig.image.from || 0)}
         >
           <div

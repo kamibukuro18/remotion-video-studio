@@ -38,20 +38,9 @@ function getTextHash(text: string): string {
 
   // Generate audio for each talk
   const { generateVoicevoxAudio } = await import('./voicevoxUtils');
-  // スピーカーID参考:
-  // 四国めたん=2
-  // ずんだもん=3
-  // 春日部つむぎ=8
-  // 雨晴はう=10
-  // 波音リツ=11
-  // 玄野武宏=12
-  // 白上虎太郎=13
-  // 青山龍星=14
-  // 冥鳴ひまり=15
-  // 九州そら=16
-  // もち子さん=20
-  // 剣崎雌雄=21
-  // あいえるたん=22
+  // Speaker ID reference:
+  // metan=2, zundamon=3, tsumugi=8, hau=10, ritsu=11, takehiro=12
+  // kotaro=13, ryusei=14, himari=15, sora=16, mochiko=20, mesuo=21, aerutan=22
   const SPEAKER_ID = VIDEO_SETTINGS.voicevoxSpeakerId;
   const VOICE_SPEED = VIDEO_SETTINGS.voicevoxSpeed;
 
@@ -91,7 +80,7 @@ function getTextHash(text: string): string {
   fs.writeFileSync(AUDIO_CACHE_PATH, JSON.stringify(audioCache, null, 2));
 
   // Generate VideoConfig
-  // BG_IMAGES配列を削除し、動的にスライド画像を読み込むように変更
+  // Resolve slide media dynamically instead of static BG_IMAGES.
   // const BG_IMAGES = [
   //   '/image/remotion-logo.png',
   //   '/image/react-logo.png',
@@ -105,7 +94,10 @@ function getTextHash(text: string): string {
   const voiceConfigs: any[] = [];
   const fromFramesMap: { [key: number]: number } = {};
   let currentFrame = 30;
-  let lastSlide: { src: string; durationInFrames?: number } | null = null;
+  let lastSlide: {
+    videoIndex: number;
+    image: { src: string; durationInFrames?: number };
+  } | null = null;
 
   for (let index = 0; index < talks.length; index++) {
     const talk = talks[index];
@@ -140,13 +132,30 @@ function getTextHash(text: string): string {
         finalSrc = `/slides/${talk.videoIndex}.png`;
       } else {
         console.warn(`Warning: Neither ${videoPath} nor ${imagePath} found for videoIndex ${talk.videoIndex}`);
-        continue; // 画像も動画も見つからない場合はスキップ
+        continue; // Skip when neither video nor image exists.
       }
       voiceConfig.image = { src: finalSrc, durationInFrames: durationInFrames };
-      lastSlide = voiceConfig.image;
+      lastSlide = {
+        videoIndex: talk.videoIndex,
+        image: { ...voiceConfig.image },
+      };
     } else if (lastSlide) {
-      // videoIndex が未指定のときは直前のスライドを引き継ぐ
-      voiceConfig.image = lastSlide;
+      // Keep previous slide when videoIndex is omitted.
+      // If previous was mp4, prefer same-index png when available.
+      if (lastSlide.image.src.endsWith('.mp4')) {
+        const fallbackImagePath = `./public/slides/${lastSlide.videoIndex}.png`;
+        if (fs.existsSync(fallbackImagePath)) {
+          voiceConfig.image = { src: `/slides/${lastSlide.videoIndex}.png` };
+          lastSlide = {
+            videoIndex: lastSlide.videoIndex,
+            image: { ...voiceConfig.image },
+          };
+        } else {
+          voiceConfig.image = { ...lastSlide.image };
+        }
+      } else {
+        voiceConfig.image = { ...lastSlide.image };
+      }
     }
 
     voiceConfigs.push(voiceConfig);
@@ -192,8 +201,8 @@ function getTextHash(text: string): string {
   const afterSection = currentContent.substring(endIndex);
 
   const generatedSection = `
-// この部分は自動生成されます。直接編集しないでください。
-// 音声生成: npx ts-node scripts/generateCharacterVoiceFiles.ts
+// This section is auto-generated. Do not edit directly.
+// Audio generation: npx ts-node scripts/generateCharacterVoiceFiles.ts
 
 export const PlaygroundConfig: VideoConfig = ${JSON.stringify(playgroundConfig, null, 2)};
 
@@ -203,8 +212,8 @@ export const PlaygroundConfig: VideoConfig = ${JSON.stringify(playgroundConfig, 
 
   fs.writeFileSync(playgroundPath, newContent);
 
-  console.log('✓ Audio generation complete');
-  console.log('✓ Updated playground.tsx');
-  console.log(`✓ Audio cache saved (${Object.keys(audioCache).length} entries)`);
-  console.log('✓ Restart Remotion preview to see changes');
+  console.log('Audio generation complete');
+  console.log('Updated playground.tsx');
+  console.log(`Audio cache saved (${Object.keys(audioCache).length} entries)`);
+  console.log('Restart Remotion preview to see changes');
 })();
